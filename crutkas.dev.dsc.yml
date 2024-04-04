@@ -4,23 +4,6 @@ properties:
   configurationVersion: 0.2.0
   resources:
  
-# Creates a new Dev Drive volume with Drive letter 'Z' and label 'Dev Drive 1' onto disk 0
-    - resource: Disk
-      id: DevDrive1
-      directives:
-        module: StorageDsc
-        description: 'Format a new Dev Drive volume onto Disk 0'
-        allowPrerelease: true
-      settings:
-        DiskId: '0'
-        DiskIdType: 'Number'
-        DriveLetter: 'Z'
-        FSLabel: 'Dev Drive'
-        DevDrive: true
-        AllowDestructive: true
-        FSFormat: 'ReFS'
-        Size: '75Gb'
-
 # Windows settings
     - resource: Microsoft.Windows.Developer/WindowsExplorer
       directives:
@@ -34,9 +17,9 @@ properties:
         description: Taskbar settings 
         allowPrerelease: true
       settings:
-        SearchboxMode: Hide
-        TaskViewButton: Hide
-        WidgetsButton: Hide
+        SearchboxMode: show
+        TaskViewButton: show
+        WidgetsButton: show
 
 # Getting Git stuff
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -49,21 +32,13 @@ properties:
         source: winget
 
     # will use the DSC here to get Visual Studio and other items.
-    - resource: GitDsc/GitClone
-      directives:
-        description: Clone the winget-cli repository
-        allowPrerelease: true
-      settings:
-        HttpsUrl: https://github.com/microsoft/powertoys.git
-        RootDirectory: 'Z:/Source/' # will clone into /PowerToys root
-
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Microsoft.VisualStudioCode
+      id: Microsoft.VisualStudioCode.Insiders
       directives:
-        description: Install Microsoft.VisualStudioCode
+        description: Install Microsoft.VisualStudioCode.Insiders
         allowPrerelease: true
       settings:
-        id: Microsoft.VisualStudioCode
+        id: Microsoft.VisualStudioCode.Insiders
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -82,22 +57,4 @@ properties:
         allowPrerelease: true
       settings:
         id: Microsoft.PowerToys
-        source: winget
-
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: AgileBits.1Password
-      directives:
-        description: Install AgileBits.1Password
-        allowPrerelease: true
-      settings:
-        id: AgileBits.1Password
-        source: winget
-
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Logitech.OptionsPlus
-      directives:
-        description: Install Logitech.OptionsPlus
-        allowPrerelease: true
-      settings:
-        id: Logitech.OptionsPlus
         source: winget

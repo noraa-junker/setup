@@ -1,4 +1,9 @@
-# crutkas WinGet Configure list
+# Aaron Junkers WinGet Configure list
+
+> [!WARNING]
+> This is currently work in progress
+
+Based on [Clint Rutkas setup scripts](https://github.com/crutkas/setup)
 
 This is my winget configure script to set up a new computer.  Still work in progress.  There will need to be a hybrid of Needing admin to run.  Parts have been validated on an Azure VM but needs more validation.
 

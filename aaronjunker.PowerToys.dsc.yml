@@ -1,0 +1,161 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: PowerToysConfigure
+      directives:
+        description: Configure PowerToys
+      settings:
+        AlwaysOnTop:
+          enabled: true
+          FrameEnabled: true
+          DoNotActivateOnGameMode: true
+          RoundCornersEnabled: true
+        Awake:
+          enabled: false
+        ColorPicker:
+          enabled: true
+          ActivationAction: OpenOnlyColorPicker
+          ShowColorName: true
+        CropAndLock:
+          enabled: false
+        EnvironmentVariables:
+          enabled: true
+          LaunchAdministrator: true
+        FancyZones:
+          enabled: true
+          FancyzonesShiftDrag: true
+        FileLocksmith:
+          enabled: true
+          ExtendedContextMenuOnly: false
+        FindMyMouse:
+          enabled: true
+          DoNotActivateOnGameMode: true
+        Hosts:
+          enabled: true
+          LaunchAdministrator: true
+          ShowStartupWarning: false
+        ImageResizer:
+          enabled: true
+        KeyboardManager:
+          enabled: true
+        MeasureTool:
+          enabled: true
+          ContinuousCapture: true
+        MouseHighlighter:
+          enabled: false
+        MouseJump:
+          enabled: true
+        MousePointerCrosshairs:
+          enabled: false
+        MouseWithoutBorders:
+          enabled: false
+        PastePlain:
+          enabled: true
+        Peek:
+          enabled: true
+          ActivationShortcut: Ctrl+Space
+          CloseAfterLosingFocus: true
+        PowerAccent:
+          enabled: true
+          ActivationKey: LeftRightArrow
+          DoNotActivateOnGameMode: true
+          ToolbarPosition: Center
+          ShowUnicodeDescription: true
+          StartSelectionFromTheLeft: true
+        PowerLauncher:
+          enabled: true
+          OpenPowerLauncher: Alt+Space
+          Position: Cursor
+          Plugins:
+            - Name: "Calculator"
+              Disabled: false
+              ActionKeyword: "="
+              IsGlobal: false
+            - Name: "Folder"
+              Disabled: false
+              IsGlobal: true
+            - Name: "History"
+              Disabled: true
+            - Name: "Windows Search"
+              Disabled: false
+              IsGlobal: true
+            - Name: "OneNote"
+              Disabled: false
+              IsGlobal: true
+            - Name: "PowerToys"
+              Disabled: false
+              IsGlobal: true
+            - Name: "Program"
+              Disabled: false
+              IsGlobal: true
+            - Name: "Registry Plugin"
+              Disabled: false
+            - Name: "Service"
+              Disabled: false
+            - Name: "Shell"
+              Disabled: false
+              ActionKeyword: ">"
+              IsGlobal: false
+            - Name: "Windows System Commands"
+              Disabled: false
+              IsGlobal: true
+            - Name: "Time and Date"
+              Disabled: false
+              IsGlobal: true
+            - Name: "Unit Converter"
+              Disabled: false
+              IsGlobal: true
+            - Name: "URI Handler"
+              Disabled: false
+              IsGlobal: true
+            - Name: "Value Generator"
+              Disabled: false
+              ActionKeyword: "#"
+              IsGlobal: false
+            - Name: "Visual Studio Code Workspaces"
+              Disabled: false
+              IsGlobal: true
+            - Name: "Web Search"
+              Disabled: false
+              ActionKeyword: "?"
+              IsGlobal: false
+            - Name: "Windows settings"
+              Disabled: false
+              IsGlobal: true
+            - Name: "Windows Terminal"
+              Disabled: false
+              IsGlobal: true
+            - Name: "Window Walker"
+              Disabled: true
+        PowerOcr:
+          Enabled: true
+        PowerPreview:
+          EnableSvgPreview: true
+          EnableSvgThumbnail: true
+          EnableMdPreview: true
+          EnableMonacoPreview: true
+          MonacoPreviewTryFormat: true
+          EnableGCodePreview: true
+          EnableGCodeThumbnail: true
+          EnableStlThumbnail: true
+          EnableQoiPreview: true
+          EnableQoiThumbnail: true
+        PowerRename:
+          Enabled: true
+          ExtendedContextMenuOnly: false
+        RegistryPreview:
+          Enabled: true
+          DefaultRegApp: true
+        ShortcutGuide:
+          Enabled: true
+          UseLegacyPressWinKeyBehavior: true
+        VideoConference:
+          Enabled: false
+        GeneralSettings:
+          Startup: true
+          EnableWarningsElevatedApps: false
+          AutoDownloadUpdates: true
+          EnableExperimentation: true
+          
