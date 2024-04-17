@@ -2,24 +2,45 @@
 # Reference: https://github.com/microsoft/PowerToys/blob/main/doc/devdocs/readme.md#compiling-powertoys
 properties:
   configurationVersion: 0.2.0
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Windows 11 or later
+        allowPrerelease: true
+      settings:
+        MinVersion: '10.0.22000'
   resources:
  
 # Windows settings
+    - resource: Microsoft.Windows.Developer/DeveloperMode
+      directives:
+        description: Developer Mode
+        allowPrerelease: true
+      settings:
+        IsEnabled: true
+    - resource: Microsoft.Windows.Developer/Taskbar
+      directives:
+        description: Taskbar settings 
+        allowPrerelease: true
+      settings:
+        Alignment: Middle
+        SearchboxMode: SearchBox
+        TaskViewButton: Show
+        WidgetsButton: Show
     - resource: Microsoft.Windows.Developer/WindowsExplorer
       directives:
         description: File Explorer settings 
         allowPrerelease: true
       settings:
         FileExtensions: Show
-        HiddenFiles: Show
-    - resource: Microsoft.Windows.Developer/Taskbar
+        HiddenFiles: Hide
+        ItemCheckBoxes: Hide
+    - resource: Microsoft.Windows.Developer/EnableDarkMode
       directives:
-        description: Taskbar settings 
+        description: Set light mode
         allowPrerelease: true
       settings:
-        SearchboxMode: show
-        TaskViewButton: show
-        WidgetsButton: show
+        Ensure: Absent
 
 # Getting Git stuff
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -29,6 +50,15 @@ properties:
         allowPrerelease: true
       settings:
         id: git.git
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GitHub.cli
+      directives:
+        description: Install GitHub.cli
+        allowPrerelease: true
+      settings:
+        id: GitHub.cli
         source: winget
 
     # will use the DSC here to get Visual Studio and other items.

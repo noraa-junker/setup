@@ -47,31 +47,23 @@ if(!(($isWinGetRecent[0] -gt 1) -or ($isWinGetRecent[0] -ge 1 -and $isWinGetRece
    }
 }
 else {
-   Write-Host "WinGet in decent state, moving to executing DSC"
+   write-Host "WinGet in decent state, moving to executing DSC"
 }
 
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
-$dscUri = "https://raw.githubusercontent.com/crutkas/setup/main/"
-$dscNonAdmin = "crutkas.nonAdmin.dsc.yml";
+$dscPowerToys = "aaronjunker.PowerToys.dsc.yml";
 $dscAdmin = "crutkas.dev.dsc.yml";
 $dscOffice = "crutkas.office.dsc.yml";
-$dscPowerToysEnterprise = "Z:\source\powertoys\.configurations\configuration.vsEnterprise.dsc.yaml";
-
-$dscOfficeUri = $dscUri + $dscOffice;
-$dscNonAdminUri = $dscUri + $dscNonAdmin 
-$dscAdminUri = $dscUri + $dscAdmin
 
 # amazing, we can now run WinGet get fun stuff
 if (!$isAdmin) {
    # Shoulder tap terminal to it gets registered moving foward
    Start-Process shell:AppsFolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App
 
-   Invoke-WebRequest -Uri $dscNonAdminUri -OutFile $dscNonAdmin 
-   winget configuration -f $dscNonAdmin 
+   winget configuration -f $dscPowerToys
    
-   # clean up, Clean up, everyone wants to clean up
-   Remove-Item $dscNonAdmin -verbose
+   ./setupDotfiles.ps1
 
    # restarting for Admin now
 	Start-Process PowerShell -wait -Verb RunAs "-NoProfile -ExecutionPolicy Bypass -Command `"cd '$pwd'; & '$mypath' $Args;`"";
@@ -89,23 +81,18 @@ else {
     New-Item -Path 'HKCU:\Software\Microsoft\Office\16.0\Outlook\OutlookAuto' -Force
     New-ItemProperty -Path 'HKCU:\Software\Microsoft\Office\16.0\Outlook\OutlookAuto' -Name 'Default' -Value "" -PropertyType String -Force
 
-
     New-Item -Path 'HKCU:\Software\Microsoft\Office\16.0\Outlook\AutoDiscover' -Force
     New-ItemProperty -Path 'HKCU:\Software\Microsoft\Office\16.0\Outlook\AutoDiscover' -Name 'ZeroConfigExchange' -Value "1" -PropertyType DWORD -Force
 
     gpupdate /force
 
-    Invoke-WebRequest -Uri $dscOfficeUri -OutFile $dscOffice 
     winget configuration -f $dscOffice 
-    Remove-Item $dscOffice -verbose
-    Start-Process outlook.exe
-    Start-Process ms-teams.exe
     Write-Host "Done: Office install"
     # Ending office workload
     # ---------------
    # Forcing Windows Update -- goal is move to dsc
    Write-Host "Start: Windows Update"
-    $UpdateCollection = New-Object -ComObject Microsoft.Update.UpdateColl
+    UpdateCollection = New-Object -ComObject Microsoft.Update.UpdateColl
     $Searcher = New-Object -ComObject Microsoft.Update.Searcher
     $Session = New-Object -ComObject Microsoft.Update.Session
     $Installer = New-Object -ComObject Microsoft.Update.Installer
@@ -125,14 +112,17 @@ else {
 
     # Staring dev workload
     Write-Host "Start: Dev flows install"
-    Invoke-WebRequest -Uri $dscAdminUri -OutFile $dscAdmin 
     winget configuration -f $dscAdmin 
 
     Write-Host "Start: PowerToys dsc install"
-    winget configuration -f $dscPowerToysEnterprise # no cleanup needed as this is intentionally local
+    git clone https://github.com/microsoft/PowerToys.git
+    winget configuration -f ./powertoys/.configurations/configuration.vsEnterprise.dsc.yaml
+    Delete-Item -Path ./powertoys -Recurse -Force
+
+    Write-Host "Configure Visual Studio"
+    &"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\common7\ide\devenv.exe" /ResetSettings .\CurrentSettings.vssettings
    
     # clean up, Clean up, everyone wants to clean up
-    Remove-Item $dscAdmin -verbose
     Write-Host "Done: Dev flows install"
     # ending dev workload
 }
