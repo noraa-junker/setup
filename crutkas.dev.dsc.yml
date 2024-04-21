@@ -88,3 +88,12 @@ properties:
       settings:
         id: Microsoft.PowerToys
         source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: JetBrains.Toolbox
+      directives:
+        description: Install JetBrains.Toolbox
+        allowPrerelease: true
+      settings:
+        id: JetBrains.Toolbox
+        source: winget

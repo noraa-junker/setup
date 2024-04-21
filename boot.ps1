@@ -1,6 +1,12 @@
+param(
+   [Parameter(Mandatory=$true)]
+   [bool]$installPersonalTools
+)
+
 $mypath = $MyInvocation.MyCommand.Path
 Write-Output "Path of the script: $mypath"
-Write-Output "Args for script: $Args"
+$additionalArgs = "-installPersonalTools $" + $installPersonalTools
+Write-Output "Args for script: $Args $additionalArgs"
 
 # forcing WinGet to be installed
 $isWinGetRecent = (winget -v).Trim('v').TrimEnd("-preview").split('.')
@@ -53,6 +59,7 @@ else {
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 $dscPowerToys = "aaronjunker.PowerToys.dsc.yml";
+$dscPersonalTools = "aaronjunker.personaltools.dsc.yml";
 $dscAdmin = "crutkas.dev.dsc.yml";
 $dscOffice = "crutkas.office.dsc.yml";
 
@@ -66,7 +73,7 @@ if (!$isAdmin) {
    ./setupDotfiles.ps1
 
    # restarting for Admin now
-	Start-Process PowerShell -wait -Verb RunAs "-NoProfile -ExecutionPolicy Bypass -Command `"cd '$pwd'; & '$mypath' $Args;`"";
+	Start-Process PowerShell -wait -Verb RunAs "-NoProfile -ExecutionPolicy Bypass -Command `"cd '$pwd'; & '$mypath' $Args $additionalArgs;`"";
 	exit;
 }
 else {
@@ -90,6 +97,12 @@ else {
     Write-Host "Done: Office install"
     # Ending office workload
     # ---------------
+
+    Write-Host "Installing personal tools"
+    if ($installPersonalTools) {
+       winget configuration -f $dscPersonalTools
+    }
+
    # Forcing Windows Update -- goal is move to dsc
    Write-Host "Start: Windows Update"
     UpdateCollection = New-Object -ComObject Microsoft.Update.UpdateColl
