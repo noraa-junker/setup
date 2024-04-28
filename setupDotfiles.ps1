@@ -8,3 +8,6 @@ Copy-Item -Path .gitconfig -Destination "$($env:USERPROFILE)\.gitconfig" -Force
 
 Write-Host "Copying Terminal Config to $env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
 Copy-Item -Path .\terminal-settings.json -Destination "$($env:USERPROFILE)\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Force
+
+Write-Host "PowerShell profile setup"
+Copy-Item -Path Microsoft.PowerShell_profile.ps1 -Destination "$($env:USERPROFILE)\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force

@@ -128,6 +128,10 @@ else {
 
    Write-Host "Configure Visual Studio"
    &"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\common7\ide\devenv.exe" /ResetSettings .\CurrentSettings.vssettings
+
+   Write-Host "Configure PowerShell"
+   Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name CompletionPredictor -acceptlicense -force"
+   Start-Process PWSH -wait -ArgumentList "Copy-Item", "-Path"
    
    # clean up, Clean up, everyone wants to clean up
    Write-Host "Done: Dev flows install"
