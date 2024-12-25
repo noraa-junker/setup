@@ -97,3 +97,21 @@ properties:
       settings:
         id: JetBrains.Toolbox
         source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Gyan.FFmpeg
+      directives:
+        description: Install Gyan.FFmpeg
+        allowPrerelease: true
+      settings:
+        id: Gyan.FFmpeg
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GNU.MidnightCommander
+      directives:
+        description: Install GNU.MidnightCommander
+        allowPrerelease: true
+      settings:
+        id: GNU.MidnightCommander
+        source: winget

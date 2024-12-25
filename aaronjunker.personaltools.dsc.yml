@@ -4,13 +4,13 @@ properties:
   configurationVersion: 0.2.0
   resources:
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: 5319275A.51895FA4EA97F_cv1g1gvanyjgm
+      id: 9NBDXK71NK08
       directives:
         description: Install WhatsApp
         allowPrerelease: true
       settings:
-        id: 5319275A.51895FA4EA97F_cv1g1gvanyjgm
-        source: winget
+        id: 9NBDXK71NK08
+        source: msstore
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: OpenWhisperSystems.Signal
       directives:
@@ -26,4 +26,60 @@ properties:
         allowPrerelease: true
       settings:
         id: Discord.Discord
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: obsproject.obsstudio
+      directives:
+        description: Install OBS Studio
+        allowPrerelease: true
+      settings:
+        id: obsproject.obsstudio
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: audacity.audacity
+      directives:
+        description: Install Audacity
+        allowPrerelease: true
+      settings:
+        id: audacity.audacity
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: 7zip.7zip
+      directives:
+        description: Install 7-Zip
+        allowPrerelease: true
+      settings:
+        id: 7zip.7zip
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Adobe.CreativeCloud
+      directives:
+        description: Install Adobe Creative Cloud
+        allowPrerelease: true
+      settings:
+        id: Adobe.CreativeCloud
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: VideoLAN.VLC
+      directives:
+        description: Install VLC Media Player
+        allowPrerelease: true
+      settings:
+        id: VideoLAN.VLC
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WinMerge.WinMerge
+      directives:
+        description: Install WinMerge
+        allowPrerelease: true
+      settings:
+        id: WinMerge.WinMerge
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: TheBrowserCompany.Arc
+      directives:
+        description: Install Arc
+        allowPrerelease: true
+      settings:
+        id: TheBrowserCompany.Arc
         source: winget

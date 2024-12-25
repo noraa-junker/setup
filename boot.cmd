@@ -1,0 +1,1 @@
+powershell -NoExit "./boot.ps1"
