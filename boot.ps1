@@ -1,6 +1,5 @@
 param(
-   [Parameter(Mandatory = $true)]
-   [bool]$installPersonalTools
+   [switch]$installPersonalTools
 )
 
 $additionalArgs = "-installPersonalTools $" + $installPersonalTools
@@ -102,7 +101,7 @@ winget configuration -f ./powertoys/.configurations/configuration.vsEnterprise.d
 Remove-Item -Path ./powertoys -Recurse -Force
 
 Write-Host "Configure Visual Studio" -ForegroundColor red -BackgroundColor white
-&"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\common7\ide\devenv.exe" /ResetSettings .\CurrentSettings.vssettings
+&"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\common7\ide\devenv.exe" /ResetSettings .\dotfiles\CurrentSettings.vssettings
 
 Write-Host "Configure PowerShell" -ForegroundColor red -BackgroundColor white
 $modules = @(

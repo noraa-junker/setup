@@ -14,3 +14,6 @@ Copy-Item -Path .\dotfiles\Microsoft.PowerShell_profile.ps1 -Destination "$($doc
 
 Write-Host "Setting up winget settings"
 Copy-Item -Path .\dotfiles\winget-settings.json -Destination "$($env:USERPROFILE)\AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json" -Force
+
+Write-Host "Set up config for legacy Windows PowerShell"
+Copy-Item -Path .\dotfiles\Microsoft.WindowsPowerShell_profile.ps1 -Destination "$($env:USERPROFILE)\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force
