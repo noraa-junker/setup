@@ -104,12 +104,19 @@ Write-Host "Configure Visual Studio"
 &"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\common7\ide\devenv.exe" /ResetSettings .\CurrentSettings.vssettings
 
 Write-Host "Configure PowerShell"
-Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name PSReadLine -acceptlicense -force"
-Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name CompletionPredictor -acceptlicense -force"
-Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Az -acceptlicense -force"
-Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Azuread -acceptlicense -force"
-Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Azureadpreview -acceptlicense -force"
-Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Pnp.powershell -acceptlicense -force"
+$modules = @(
+   "PSReadLine",
+   "CompletionPredictor",
+   "Az",
+   "Azuread",
+   "Azureadpreview",
+   "Pnp.powershell"
+)
+
+foreach ($module in $modules) {
+   Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name $module -acceptlicense -force"
+}
+
 Update-Help
 
 Write-Host "Configure PowerToys"
