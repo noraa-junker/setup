@@ -86,10 +86,10 @@ if ($installPersonalTools) {
 
    gpupdate /force
 
-   winget configuration -f $dscOffice 
+   winget configuration -f $dscOffice --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 
    Write-Host "Installing personal tools" -ForegroundColor red -BackgroundColor white
-   winget configuration -f $dscPersonalTools
+   winget configuration -f $dscPersonalTools --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 }
 
 # Staring dev workload
@@ -98,7 +98,7 @@ winget configuration -f $dscDev
 
 Write-Host "Start: PowerToys dsc install"
 git clone https://github.com/microsoft/PowerToys.git --depth 1 -b main --single-branch
-winget configuration -f ./powertoys/.configurations/configuration.vsEnterprise.dsc.yaml
+winget configuration -f ./powertoys/.configurations/configuration.vsEnterprise.dsc.yaml --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 Remove-Item -Path ./powertoys -Recurse -Force
 
 Write-Host "Configure Visual Studio" -ForegroundColor red -BackgroundColor white
@@ -121,7 +121,10 @@ foreach ($module in $modules) {
 Update-Help
 
 Write-Host "Configure PowerToys" -ForegroundColor red -BackgroundColor white
-winget configuration -f $dscPowerToys
+winget configuration -f $dscPowerToys --disable-interactivity --suppress-initial-details --accept-configuration-agreements
+
+Write-Host "Configure Environment" -ForegroundColor red -BackgroundColor white
+winget configuration -f $dscEnvironment --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 
 # clean up, Clean up, everyone wants to clean up
 Write-Host "Done: Dev flows install" -ForegroundColor red -BackgroundColor white
