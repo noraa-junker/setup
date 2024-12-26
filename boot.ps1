@@ -95,25 +95,6 @@ if ($installPersonalTools) {
    winget configuration -f $dscPersonalTools
 }
 
-# Forcing Windows Update -- goal is move to dsc
-Write-Host "Start: Windows Update"
-$Searcher = New-Object -ComObject Microsoft.Update.Searcher
-$Session = New-Object -ComObject Microsoft.Update.Session
-$Installer = New-Object -ComObject Microsoft.Update.Installer
-
-$Searcher.ServerSelection = 2
-
-$Result = $Searcher.Search("IsInstalled=0 and IsHidden=0")
-
-$Downloader = $Session.CreateUpdateDownloader()
-$Downloader.Updates = $Result.Updates
-$Downloader.Download()
-
-$Installer.Updates = $Result.Updates
-$Installer.Install()
-Write-Host "Done: Windows Update"
-# Forcing Windows Update complete 
-
 # Staring dev workload
 Write-Host "Start: Dev flows install"
 winget configuration -f $dscAdmin 
@@ -133,7 +114,7 @@ Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -
 Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Azuread -acceptlicense -force"
 Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Azureadpreview -acceptlicense -force"
 Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Pnp.powershlll -acceptlicense -force"
-Start-Process PWSH -wait -ArgumentList "Copy-Item", "-Path"
+Update-Help
 
 Write-Host "Configure PowerToys"
 winget configuration -f $dscPowerToys
