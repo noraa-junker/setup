@@ -13,8 +13,7 @@ function cdk {
     Set-Location K:/
 }
 
-
-Set-PSReadLineKeyHandler -Chord "Tab" -Function AcceptSuggestion
+Set-PSReadLineKeyHandler -Chord "Tab" -Function MenuComplete
 Set-PSReadLineOption -BellStyle None -PredictionViewStyle ListView -PredictionSource HistoryAndPlugin
 function changeToDocuments { Set-Location -Path "S:\OneDrive - Aaron Junker Technologies\Dokumente\" }
 Set-Alias cdd changeToDocuments

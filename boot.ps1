@@ -58,8 +58,9 @@ if (!$isAdmin) {
 
 $dscPowerToys = "./configurationFiles/aaronjunker.PowerToys.dsc.yml";
 $dscPersonalTools = "./configurationFiles/aaronjunker.personalTools.dsc.yml";
-$dscDev = "./configurationFiles/crutkas.dev.dsc.yml";
-$dscOffice = "./configurationFiles/crutkas.office.dsc.yml";
+$dscDev = "./configurationFiles/aaronjunker.dev.dsc.yml";
+$dscOffice = "./configurationFiles/aaronjunker.office.dsc.yml";
+$dscEnvironment = "./configurationFiles/aaronjunker.envVars.dsc.yml";
 
 // Uninstall Terminal and install Preview
 Write-Host "Uninstalling Terminal and installing Terminal Preview" -ForegroundColor red -BackgroundColor white
@@ -69,7 +70,7 @@ winget install Microsoft.WindowsTerminal.Preview --source winget
 Write-Host "Setting up dotfiles..." -ForegroundColor red -BackgroundColor white
 ./setupDotfiles.ps1
 
-Write-Host "Install nerd fonts" -ForegroundColor red -BackgroundColor white
+Write-Host "Installing nerd fonts..." -ForegroundColor red -BackgroundColor white
 ./installFont.ps1
 
 if ($installPersonalTools) {
