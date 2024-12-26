@@ -3,8 +3,6 @@ param(
    [bool]$installPersonalTools
 )
 
-$mypath = $MyInvocation.MyCommand.Path
-Write-Output "Path of the script: $mypath"
 $additionalArgs = "-installPersonalTools $" + $installPersonalTools
 Write-Output "Args for script: $Args $additionalArgs"
 
@@ -60,21 +58,22 @@ if (!$isAdmin) {
 
 $dscPowerToys = "aaronjunker.PowerToys.dsc.yml";
 $dscPersonalTools = "aaronjunker.personaltools.dsc.yml";
-$dscAdmin = "crutkas.dev.dsc.yml";
+$dscDev = "crutkas.dev.dsc.yml";
 $dscOffice = "crutkas.office.dsc.yml";
 
+// Uninstall Terminal and install Preview
+Write-Host "Uninstalling Terminal and installing Terminal Preview"
 winget uninstall Microsoft.WindowsTerminal --force
 winget install Microsoft.WindowsTerminal.Preview --source winget
 
 Write-Host "Setting up dotfiles..."
-
 ./setupDotfiles.ps1
 
 Write-Host "Install nerd fonts"
 ./installFont.ps1
 
 if ($installPersonalTools) {
-   Write-Host "Start: Office install"
+   Write-Host "Installing Office"
    New-Item -Path 'HKCU:\Software\Microsoft\Office\16.0\Outlook\' -Force
    New-ItemProperty -Path 'HKCU:\Software\Microsoft\Office\16.0\Outlook\' -Name 'DefaultProfile' -Value "OutlookAuto" -PropertyType String -Force
 
@@ -87,20 +86,17 @@ if ($installPersonalTools) {
    gpupdate /force
 
    winget configuration -f $dscOffice 
-   Write-Host "Done: Office install"
-}
 
-Write-Host "Installing personal tools"
-if ($installPersonalTools) {
+   Write-Host "Installing personal tools"
    winget configuration -f $dscPersonalTools
 }
 
 # Staring dev workload
-Write-Host "Start: Dev flows install"
-winget configuration -f $dscAdmin 
+Write-Host ""
+winget configuration -f $dscDev 
 
 Write-Host "Start: PowerToys dsc install"
-git clone https://github.com/microsoft/PowerToys.git
+git clone https://github.com/microsoft/PowerToys.git --depth 1 -b main --single-branch
 winget configuration -f ./powertoys/.configurations/configuration.vsEnterprise.dsc.yaml
 Remove-Item -Path ./powertoys -Recurse -Force
 
