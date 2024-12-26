@@ -5,48 +5,14 @@ param(
 $additionalArgs = "-installPersonalTools $" + $installPersonalTools
 Write-Host "Args for script: $Args $additionalArgs" -ForegroundColor red -BackgroundColor white
 
-# forcing WinGet to be installed
-$isWinGetRecent = (winget -v).Trim('v').TrimEnd("-preview").split('.')
-
 # turning off progress bar to make invoke WebRequest fast
 $ProgressPreference = 'SilentlyContinue'
 
-if (!(($isWinGetRecent[0] -gt 1) -or ($isWinGetRecent[0] -ge 1 -and $isWinGetRecent[1] -ge 6))) { # WinGet is greater than v1 or v1.6 or higher
-   $paths = "Microsoft.VCLibs.x64.14.00.Desktop.appx", "Microsoft.UI.Xaml.2.8.x64.appx", "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-   $uris = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx", "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx", "https://aka.ms/getwinget"
-   Write-Host "Downloading WinGet and its dependencies..." -ForegroundColor red -BackgroundColor white
+# Turning off all confirmation prompts
+$ConfirmPreference = 'None'
 
-   for ($i = 0; $i -lt $uris.Length; $i++) {
-      $filePath = $paths[$i]
-      $fileUri = $uris[$i]
-      Write-Host "Downloading: ($filePat) from $fileUri" -ForegroundColor red -BackgroundColor white
-      Invoke-WebRequest -Uri $fileUri -OutFile $filePath
-   }
-
-   Write-Host "Installing WinGet and its dependencies..."
-   
-   foreach ($filePath in $paths) {
-      Write-Host "Installing: ($filePath)" -ForegroundColor red -BackgroundColor white
-      Add-AppxPackage $filePath
-   }
-
-   Write-Host "Verifying Version number of WinGet"
-   winget -v
-
-   Write-Host "Cleaning up"
-   foreach ($filePath in $paths) {
-      if (Test-Path $filePath) {
-         Write-Host "Deleting: ($filePath)" -ForegroundColor red -BackgroundColor white
-         Remove-Item $filePath -verbose
-      } 
-      else {
-         Write-Error "Path doesn't exits: ($filePath)"
-      }
-   }
-}
-else {
-   write-Host "WinGet in decent state, moving to executing DSC" -ForegroundColor red -BackgroundColor white
-}
+# forcing WinGet to be installed
+./setupWinget.ps1
 
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
@@ -62,7 +28,7 @@ $dscOffice = "./configurationFiles/aaronjunker.office.dsc.yml";
 $dscEnvironment = "./configurationFiles/aaronjunker.envVars.dsc.yml";
 
 // Uninstall Terminal and install Preview
-Write-Host "Uninstalling Terminal and installing Terminal Preview" -ForegroundColor red -BackgroundColor white
+Write-Host "Uninstalling Terminal and installing Terminal Preview..." -ForegroundColor red -BackgroundColor white
 winget uninstall Microsoft.WindowsTerminal --force
 winget install Microsoft.WindowsTerminal.Preview --source winget
 
@@ -73,7 +39,7 @@ Write-Host "Installing nerd fonts..." -ForegroundColor red -BackgroundColor whit
 ./installFont.ps1
 
 if ($installPersonalTools) {
-   Write-Host "Installing Office" -ForegroundColor red -BackgroundColor white
+   Write-Host "Installing Office..." -ForegroundColor red -BackgroundColor white
    New-Item -Path 'HKCU:\Software\Microsoft\Office\16.0\Outlook\' -Force
    New-ItemProperty -Path 'HKCU:\Software\Microsoft\Office\16.0\Outlook\' -Name 'DefaultProfile' -Value "OutlookAuto" -PropertyType String -Force
 
@@ -87,23 +53,23 @@ if ($installPersonalTools) {
 
    winget configuration -f $dscOffice --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 
-   Write-Host "Installing personal tools" -ForegroundColor red -BackgroundColor white
+   Write-Host "Installing personal tools.." -ForegroundColor red -BackgroundColor white
    winget configuration -f $dscPersonalTools --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 }
 
 # Staring dev workload
-Write-Host "Setup dev env" -ForegroundColor red -BackgroundColor white
+Write-Host "Setup dev environment..." -ForegroundColor red -BackgroundColor white
 winget configuration -f $dscDev 
 
-Write-Host "Start: PowerToys dsc install"
+Write-Host "Setting up and installing Visual Studio..." -ForegroundColor red -BackgroundColor white
 git clone https://github.com/microsoft/PowerToys.git --depth 1 -b main --single-branch
 winget configuration -f ./powertoys/.configurations/configuration.vsEnterprise.dsc.yaml --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 Remove-Item -Path ./powertoys -Recurse -Force
 
-Write-Host "Configure Visual Studio" -ForegroundColor red -BackgroundColor white
+Write-Host "Configuring Visual Studio..." -ForegroundColor red -BackgroundColor white
 &"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\common7\ide\devenv.exe" /ResetSettings .\dotfiles\CurrentSettings.vssettings
 
-Write-Host "Configure PowerShell" -ForegroundColor red -BackgroundColor white
+Write-Host "Configuring PowerShell..." -ForegroundColor red -BackgroundColor white
 $modules = @(
    "PSReadLine",
    "CompletionPredictor",
@@ -117,14 +83,12 @@ foreach ($module in $modules) {
    Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name $module -acceptlicense -force"
 }
 
-Update-Help
+Update-Help -Confirm
 
-Write-Host "Configure PowerToys" -ForegroundColor red -BackgroundColor white
+Write-Host "Configuring PowerToys..." -ForegroundColor red -BackgroundColor white
 winget configuration -f $dscPowerToys --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 
-Write-Host "Configure Environment" -ForegroundColor red -BackgroundColor white
+Write-Host "Configuring Environment..." -ForegroundColor red -BackgroundColor white
 winget configuration -f $dscEnvironment --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 
-# clean up, Clean up, everyone wants to clean up
-Write-Host "Done: Dev flows install" -ForegroundColor red -BackgroundColor white
-# ending dev workload
+Write-Host "Done!" -ForegroundColor Green -BackgroundColor white
