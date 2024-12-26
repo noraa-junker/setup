@@ -56,10 +56,10 @@ if (!$isAdmin) {
    exit
 }
 
-$dscPowerToys = "aaronjunker.PowerToys.dsc.yml";
-$dscPersonalTools = "aaronjunker.personaltools.dsc.yml";
-$dscDev = "crutkas.dev.dsc.yml";
-$dscOffice = "crutkas.office.dsc.yml";
+$dscPowerToys = "./configurationFiles/aaronjunker.PowerToys.dsc.yml";
+$dscPersonalTools = "./configurationFiles/aaronjunker.personalTools.dsc.yml";
+$dscDev = "./configurationFiles/crutkas.dev.dsc.yml";
+$dscOffice = "./configurationFiles/crutkas.office.dsc.yml";
 
 // Uninstall Terminal and install Preview
 Write-Host "Uninstalling Terminal and installing Terminal Preview"
@@ -109,7 +109,7 @@ Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -
 Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Az -acceptlicense -force"
 Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Azuread -acceptlicense -force"
 Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Azureadpreview -acceptlicense -force"
-Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Pnp.powershlll -acceptlicense -force"
+Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name Pnp.powershell -acceptlicense -force"
 Update-Help
 
 Write-Host "Configure PowerToys"
