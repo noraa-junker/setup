@@ -91,4 +91,9 @@ winget configuration -f $dscPowerToys --disable-interactivity --suppress-initial
 Write-Host "Configuring Environment..." -ForegroundColor red -BackgroundColor white
 winget configuration -f $dscEnvironment --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 
+Write-Host "Removing unneeded installed system components"
+Get-AppxPackage "*.mixed*" | Remove-AppxPackage
+Get-AppxPackage "*xboxgamingoverlay*" | Remove-AppxPackage
+Get-AppxPackage "*compatibil*" | remove-appxpackage
+
 Write-Host "Done!" -ForegroundColor Green -BackgroundColor white
