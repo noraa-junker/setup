@@ -12,3 +12,10 @@ Based on [Clint Rutkas setup scripts](https://github.com/crutkas/setup)
 - [ ] Find out argument for Enter-DevShell
 - [ ] Sync vscode settings
 - [ ] Move uninstall terminal and install terminal preview to DSC
+
+ 
+## What to do if no winget is installed (ex. Sandbox)
+```
+Install-Script -Name winget-install -RequiredVersion 2.1.0
+.\setupWinget.ps1
+```

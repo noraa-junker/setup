@@ -32,8 +32,6 @@ Write-Host "Uninstalling Terminal and installing Terminal Preview..." -Foregroun
 winget uninstall Microsoft.WindowsTerminal --force
 winget install Microsoft.WindowsTerminal.Preview --source winget
 
-Write-Host "Setting up dotfiles..." -ForegroundColor red -BackgroundColor white
-./setupDotfiles.ps1
 
 Write-Host "Installing nerd fonts..." -ForegroundColor red -BackgroundColor white
 ./setupFonts.ps1
@@ -97,5 +95,8 @@ Write-Host "Removing unneeded installed system components"
 Get-AppxPackage "*.mixed*" | Remove-AppxPackage
 Get-AppxPackage "*xboxgamingoverlay*" | Remove-AppxPackage
 Get-AppxPackage "*compatibil*" | remove-appxpackage
+
+Write-Host "Setting up dotfiles..." -ForegroundColor red -BackgroundColor white
+./setupDotfiles.ps1
 
 Write-Host "Done!" -ForegroundColor Green -BackgroundColor white
