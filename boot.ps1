@@ -27,7 +27,7 @@ $dscDev = "./configurationFiles/aaronjunker.dev.dsc.yml";
 $dscOffice = "./configurationFiles/aaronjunker.office.dsc.yml";
 $dscEnvironment = "./configurationFiles/aaronjunker.envVars.dsc.yml";
 
-// Uninstall Terminal and install Preview
+# Uninstall Terminal and install Preview
 Write-Host "Uninstalling Terminal and installing Terminal Preview..." -ForegroundColor red -BackgroundColor white
 winget uninstall Microsoft.WindowsTerminal --force
 winget install Microsoft.WindowsTerminal.Preview --source winget
