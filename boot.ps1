@@ -36,7 +36,7 @@ Write-Host "Setting up dotfiles..." -ForegroundColor red -BackgroundColor white
 ./setupDotfiles.ps1
 
 Write-Host "Installing nerd fonts..." -ForegroundColor red -BackgroundColor white
-./installFont.ps1
+./setupFonts.ps1
 
 if ($installPersonalTools) {
    Write-Host "Installing Office..." -ForegroundColor red -BackgroundColor white

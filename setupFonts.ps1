@@ -7,7 +7,7 @@ Set-Location "$tempfolder\CascadiaCode"
 foreach ($file in Get-ChildItem *.ttf) {
     $fileName = $file.Name
     if (-not (Test-Path -Path "C:\Windows\fonts\$fileName")) {
-        echo $fileName
+        Write-Output $fileName
         Get-Item $file | ForEach-Object { $fonts.CopyHere($_.FullName) }
     }
 }
