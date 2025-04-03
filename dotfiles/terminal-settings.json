@@ -37,6 +37,19 @@
     [
         {
             "type": "remainingProfiles"
+        },
+        {
+            "allowEmpty": false,
+            "entries": 
+            [
+                {
+                    "type": "separator"
+                }
+            ],
+            "icon": null,
+            "inline": "never",
+            "name": "Other",
+            "type": "folder"
         }
     ],
     "profiles": 
