@@ -76,7 +76,9 @@ $modules = @(
    "Az",
    "Azuread",
    "Azureadpreview",
-   "Pnp.powershell"
+   "Pnp.powershell",
+   "kmt.winget.autocomplete",
+   "git-completion"
 )
 
 foreach ($module in $modules) {

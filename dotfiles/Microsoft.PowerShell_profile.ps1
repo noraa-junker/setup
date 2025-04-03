@@ -1,4 +1,6 @@
 Import-Module kmt.winget.autocomplete
+Import-Module CompletionPredictor
+import-module git-completion
 
 Set-Alias code code-insiders
 Set-Alias ":q" exitFunction

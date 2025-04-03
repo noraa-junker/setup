@@ -9,8 +9,10 @@ function MakeLink {
     New-Item -Path $target -ItemType HardLink -Value $link
 }
 
-Write-Host "Copying .vimrc to $env:USERPROFILE"
+Write-Host "Copying .vimrc to $env:USERPROFILE and to nvim config"
 MakeLink -target "$($env:USERPROFILE)\.vimrc" -link ".\dotfiles\.vimrc"
+New-Item "$($env:APPDATA)\..\local" -Name "nvim" -ItemType "Directory"
+MakeLink -target "$($env:APPDATA)\..\local\nvim\init.vim" -link ".\dotfiles\.vimrc"
 
 Write-Host "Copying .gitconfig to $env:USERPROFILE"
 MakeLink -target "$($env:USERPROFILE)\.gitconfig" -link ".\dotfiles\.gitconfig"
