@@ -5,3 +5,10 @@
 
 Based on [Clint Rutkas setup scripts](https://github.com/crutkas/setup)
 
+## Todo 
+- [ ] Move office registry keys to DSC
+- [ ] Allow office insider installs
+- [ ] Add remove certain preinstalled apps to DSC
+- [ ] Find out argument for Enter-DevShell
+- [ ] Sync vscode settings
+- [ ] Move uninstall terminal and install terminal preview to DSC
