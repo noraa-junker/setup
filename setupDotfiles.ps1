@@ -1,4 +1,4 @@
-function MakeLink{
+function MakeLink {
     param(
         [string]$link,
         [string]$target
