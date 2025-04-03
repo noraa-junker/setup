@@ -115,3 +115,11 @@ properties:
       settings:
         id: GNU.MidnightCommander
         source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: NeoVim
+      directives:
+        description: Install NeoVim
+        allowPrerelease: true
+      settings:
+        id: Neovim.Neovim
+        source: winget
