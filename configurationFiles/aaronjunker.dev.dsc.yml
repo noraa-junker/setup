@@ -123,3 +123,19 @@ properties:
       settings:
         id: Neovim.Neovim
         source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: OpenJS.NodeJS
+      directives:
+        description: Install OpenJS.NodeJS
+        allowPrerelease: true
+      settings:
+        id: OpenJS.NodeJS
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: 9NCVDN91XZQP
+      directives:
+        description: Install Python 3.12
+        allowPrerelease: true
+      settings:
+        id: 9NCVDN91XZQP
+        source: msstore

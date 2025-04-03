@@ -83,3 +83,19 @@ properties:
       settings:
         id: TheBrowserCompany.Arc
         source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: 9NRX63209R7B
+      directives:
+        description: Install Microsoft Outlook
+        allowPrerelease: true
+      settings:
+        id: 9NRX63209R7B
+        source: msstore
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Threema.Threema
+      directives:
+        description: Install Threema
+        allowPrerelease: true
+      settings:
+        id: Threema.Threema
+        source: winget
