@@ -4,14 +4,16 @@ function MakeLink {
         [string]$target
     )
     if (Test-Path $target) {
-        Remove-Item $target -Force
+        Remove-Item $target -Force | Out-Null
     }
-    New-Item -Path $target -ItemType HardLink -Value $link
+    New-Item -Path $target -ItemType HardLink -Value $link | Out-Null
 }
 
 Write-Host "Copying .vimrc to $env:USERPROFILE and to nvim config"
 MakeLink -target "$($env:USERPROFILE)\.vimrc" -link ".\dotfiles\.vimrc"
-New-Item "$($env:APPDATA)\..\local" -Name "nvim" -ItemType "Directory"
+if (-Not (Test-Path "$($env:APPDATA)\..\local\nvim")) {
+    New-Item "$($env:APPDATA)\..\local" -Name "nvim" -ItemType "Directory"
+}
 MakeLink -target "$($env:APPDATA)\..\local\nvim\init.vim" -link ".\dotfiles\.vimrc"
 
 Write-Host "Copying .gitconfig to $env:USERPROFILE"
