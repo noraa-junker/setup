@@ -84,7 +84,9 @@ foreach ($module in $modules) {
    Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Install-Module -Name $module -acceptlicense -force"
 }
 
+Write-Host "Updating help..."
 Update-Help -Confirm
+tart-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Update-Help -Confirm"
 
 Write-Host "Configuring PowerToys..." -ForegroundColor red -BackgroundColor white
 winget configuration -f $dscPowerToys --disable-interactivity --suppress-initial-details --accept-configuration-agreements
