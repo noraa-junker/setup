@@ -32,6 +32,7 @@ Write-Host "Uninstalling Terminal and installing Terminal Preview..." -Foregroun
 winget uninstall Microsoft.WindowsTerminal --force
 winget install Microsoft.WindowsTerminal.Preview --source winget
 
+winget install Microsoft.PowerShell
 
 Write-Host "Installing nerd fonts..." -ForegroundColor red -BackgroundColor white
 ./setupFonts.ps1
