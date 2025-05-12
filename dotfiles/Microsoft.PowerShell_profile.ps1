@@ -26,8 +26,19 @@ function cdd {
     Set-Location -Path $documentsPath
 }
 
-function openMidnightCommander { & "mc.exe" K:\ C:\users\aaron\ }
+function openMidnightCommander { & "C:\Program Files (x86)\Midnight Commander\mc.exe" K:\ C:\users\aaron\ }
 Set-Alias mc openMidnightCommander
 
 function exitFunction { exit }
+
+function Count-Lines {
+    scc ($PsBoundParameters.Values + $args)
+}
+
+function lsReplacement {
+    eza -l --icons=always -h --git ($PSBoundParameters.Values + $args)
+}
+Set-Alias ls lsReplacement
+
+Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 Clear-Host

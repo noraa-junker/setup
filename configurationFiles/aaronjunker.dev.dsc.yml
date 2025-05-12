@@ -139,3 +139,27 @@ properties:
       settings:
         id: 9NCVDN91XZQP
         source: msstore
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ajeetdsouza.zoxide
+      directives:
+        description: Install ajeetdsouza.zoxide
+        allowPrerelease: true
+      settings:
+        id: ajeetdsouza.zoxide
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: benboyter.scc
+      directives:
+        description: Install benboyter.scc
+        allowPrerelease: true
+      settings:
+        id: benboyter.scc
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: eza-community.eza
+      directives:
+        description: Install eza-community.eza
+        allowPrerelease: true
+      settings:
+        id: eza-community.eza
+        source: winget
