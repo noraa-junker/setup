@@ -2,6 +2,11 @@ param(
    [switch]$installPersonalTools
 )
 
+if ((get-location).Drive.Name -ne "c:/") {
+   Write-Host "Run this script only from the C:/ drive so that the hardlinks can be created" -ForegroundColor red -BackgroundColor white
+   exit
+}
+
 $additionalArgs = "-installPersonalTools $" + $installPersonalTools
 Write-Host "Args for script: $Args $additionalArgs" -ForegroundColor red -BackgroundColor white
 
@@ -98,6 +103,11 @@ Write-Host "Removing unneeded installed system components"
 Get-AppxPackage "*.mixed*" | Remove-AppxPackage
 Get-AppxPackage "*xboxgamingoverlay*" | Remove-AppxPackage
 Get-AppxPackage "*compatibil*" | remove-appxpackage
+
+Write-Host "Configuring GameBar so it won't pop up on a game start"
+
+reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR /f /t REG_DWORD /v "AppCaptureEnabled" /d 0
+reg add HKEY_CURRENT_USER\System\GameConfigStore /f /t REG_DWORD /v "GameDVR_Enabled" /d 0
 
 Write-Host "Setting up dotfiles..." -ForegroundColor red -BackgroundColor white
 ./setupDotfiles.ps1
