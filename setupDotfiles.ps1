@@ -31,4 +31,4 @@ Write-Host "Setting up winget settings"
 MakeLink -target "$($env:USERPROFILE)\AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json" -link ".\dotfiles\winget-settings.json"
 
 Write-Host "Set up config for legacy Windows PowerShell"
-MakeLink -target "$($env:USERPROFILE)\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -link ".\dotfiles\Microsoft.WindowsPowerShell_profile.ps1"
+MakeLink -target "$($documents)\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -link ".\dotfiles\Microsoft.WindowsPowerShell_profile.ps1"

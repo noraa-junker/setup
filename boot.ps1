@@ -63,7 +63,7 @@ if ($installPersonalTools) {
 
 # Staring dev workload
 Write-Host "Setup dev environment..." -ForegroundColor red -BackgroundColor white
-winget configuration -f $dscDev 
+winget configuration -f $dscDev --disable-interactivity --suppress-initial-details --accept-configuration-agreements
 
 Write-Host "Setting up and installing Visual Studio..." -ForegroundColor red -BackgroundColor white
 git clone https://github.com/microsoft/PowerToys.git --depth 1 -b main --single-branch
@@ -91,7 +91,7 @@ foreach ($module in $modules) {
 
 Write-Host "Updating help..."
 Update-Help -Confirm
-tart-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Update-Help -Confirm"
+Start-Process PWSH -wait -Verb RunAs -ArgumentList "-Command", "Update-Help -Confirm"
 
 Write-Host "Configuring PowerToys..." -ForegroundColor red -BackgroundColor white
 winget configuration -f $dscPowerToys --disable-interactivity --suppress-initial-details --accept-configuration-agreements
