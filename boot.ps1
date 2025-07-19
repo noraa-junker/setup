@@ -2,7 +2,7 @@ param(
    [switch]$installPersonalTools
 )
 
-if ((get-location).Drive.Name -ne "c:/") {
+if ((get-location).Drive.Name -ne "C") {
    Write-Host "Run this script only from the C:/ drive so that the hardlinks can be created" -ForegroundColor red -BackgroundColor white
    exit
 }
