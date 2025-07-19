@@ -17,6 +17,7 @@
         "resume": true,
         "configuration03": true,
         "configureExport": false,
-        "configureSelfElevate": true
+        "configureSelfElevate": true,
+        "fonts": true
     }
 }

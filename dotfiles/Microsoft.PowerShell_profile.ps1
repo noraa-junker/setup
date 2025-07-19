@@ -26,7 +26,7 @@ function cdd {
     Set-Location -Path $documentsPath
 }
 
-function openMidnightCommander { & "C:\Program Files (x86)\Midnight Commander\mc.exe" K:\ C:\users\aaron\ }
+function openMidnightCommander { & "C:\Program Files\Midnight Commander\mc.exe" K:\ C:\users\aaron\ }
 Set-Alias mc openMidnightCommander
 
 function exitFunction { exit }

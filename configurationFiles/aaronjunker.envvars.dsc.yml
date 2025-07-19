@@ -16,7 +16,7 @@ properties:
       settings:
         Name: "Path"
         Path: true
-        Value: "C:\\Program Files (x86)\\Midnight Commander"
+        Value: "C:\\Program Files\\Midnight Commander"
     - resource: Environment
       directives:
         description: Configure Environment Variables
@@ -24,3 +24,10 @@ properties:
         Name: "Path"
         Path: true
         Value: "C:\\Program Files\\PuTTY\\"
+    - resource: Environment
+      directives:
+        description: Configure Environment Variables
+      settings:
+        Name: "Path"
+        Path: true
+        Value: "C:\\Program Files\\7-Zip"

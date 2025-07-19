@@ -6,7 +6,18 @@ function MakeLink {
     if (Test-Path $target) {
         Remove-Item $target -Force | Out-Null
     }
-    New-Item -Path $target -ItemType HardLink -Value $link | Out-Null
+    $Drive1 = Get-DriveLetter -path $link
+    $Drive2 = Get-DriveLetter -path $target
+    if ($Drive1 -eq $Drive2) {
+	New-Item -Path $target -ItemType HardLink -Value $link | Out-Null
+    } else {
+	Copy-Item $link -destination $target
+    }
+}
+
+function Get-DriveLetter {
+    param([string]$path)
+    return ($path -split ':')[0].ToUpper()
 }
 
 Write-Host "Copying .vimrc to $env:USERPROFILE and to nvim config"
