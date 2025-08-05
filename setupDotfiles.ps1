@@ -43,3 +43,6 @@ MakeLink -target "$($env:USERPROFILE)\AppData\Local\Packages\Microsoft.DesktopAp
 
 Write-Host "Set up config for legacy Windows PowerShell"
 MakeLink -target "$($documents)\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -link ".\dotfiles\Microsoft.WindowsPowerShell_profile.ps1"
+
+Write-Host "Setting up automatic network drive mapping"
+MakeLink -target "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\MapNetworkDrives.cmd" -link ".\dotfiles\MapNetworkDrives.cmd"
