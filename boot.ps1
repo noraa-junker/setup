@@ -26,11 +26,11 @@ if (!$isAdmin) {
    exit
 }
 
-$dscPowerToys = "./configurationFiles/aaronjunker.PowerToys.dsc.yml";
-$dscPersonalTools = "./configurationFiles/aaronjunker.personalTools.dsc.yml";
-$dscDev = "./configurationFiles/aaronjunker.dev.dsc.yml";
-$dscOffice = "./configurationFiles/aaronjunker.office.dsc.yml";
-$dscEnvironment = "./configurationFiles/aaronjunker.envVars.dsc.yml";
+$dscPowerToys = "./configurationFiles/noraajunker.PowerToys.dsc.yml";
+$dscPersonalTools = "./configurationFiles/noraajunker.personalTools.dsc.yml";
+$dscDev = "./configurationFiles/noraajunker.dev.dsc.yml";
+$dscOffice = "./configurationFiles/noraajunker.office.dsc.yml";
+$dscEnvironment = "./configurationFiles/noraajunker.envVars.dsc.yml";
 
 # Uninstall Terminal and install Preview
 Write-Host "Uninstalling Terminal and installing Terminal Preview..." -ForegroundColor red -BackgroundColor white
